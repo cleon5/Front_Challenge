@@ -176,7 +176,7 @@ const Component = ({
 
     let translateX = beforeTranslate[0];
     let translateY = beforeTranslate[1];
-
+     console.log(translateX, translateY)
     ref.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
 
     setNodoReferencia({
@@ -247,13 +247,15 @@ const Component = ({
         resizable
         draggable
         onDrag={(e) => {
-          let ejex = parentBounds.width + parentBounds.left - e.width - 8
+          let ejex = parentBounds.width  - e.width 
           let x  = e.left > ejex ? ejex : e.left;
-          let positionX = x > parentBounds.left  ? x : parentBounds.left -8
+          let positionX = x > parentBounds.left  ? x : 0
 
-          let ejeY = parentBounds.height + parentBounds.top - e.height - 29
+          console.log( parentBounds.height,  parentBounds.top  ,e.height, (e.clientY))
+          let ejeY = parentBounds.height  - (e.height) 
+          //console.log(ejeY)
           let y  = e.top > ejeY ? ejeY : e.top;
-          let positionY = y > parentBounds.top  ? y : parentBounds.top -29
+          let positionY = y > parentBounds.top  ? y :0
 
           updateMoveable(id, {
             top: positionY,
