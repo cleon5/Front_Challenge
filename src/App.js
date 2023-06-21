@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import Moveable from "react-moveable";
+import "./styles.css"
 
 const App = () => {
   const [moveableComponents, setMoveableComponents] = useState([]);
@@ -86,7 +87,10 @@ const App = () => {
 
   return (//main componet
     <main style={{ height : "100vh", width: "100vw" }}>
-      <button onClick={addMoveable}>Add Moveable1</button>
+      <div className="tittle">
+       <button className="buttonAdd" onClick={addMoveable}>Add Componet</button> 
+      </div>
+      
       <div
         id="parent"
         style={{
@@ -94,6 +98,7 @@ const App = () => {
           background: "black",
           height: "80vh",
           width: "80vw",
+          marginLeft:"10vw"
         }}
       >
         {moveableComponents.map((item, index) => (
@@ -176,7 +181,7 @@ const Component = ({
 
     let translateX = beforeTranslate[0];
     let translateY = beforeTranslate[1];
-     console.log(translateX, translateY)
+
     ref.current.style.transform = `translate(${translateX}px, ${translateY}px)`;
 
     setNodoReferencia({
@@ -204,6 +209,8 @@ const Component = ({
     const { lastEvent } = e;
     const { drag } = lastEvent;
     const { beforeTranslate } = drag;
+
+    ref.current.style.transform = `translate(${0}px, ${0}px)`;
 
     const absoluteTop = top
     const absoluteLeft = left 
@@ -240,7 +247,7 @@ const Component = ({
           src={backgroundImage}
           style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
-        <button onClick={() =>Delete(id)}>sad</button>
+        <button className="btnDelete" onClick={() =>Delete(id)}>X</button>
         </div>
       <Moveable
         target={isSelected && ref.current}
@@ -251,9 +258,7 @@ const Component = ({
           let x  = e.left > ejex ? ejex : e.left;
           let positionX = x > parentBounds.left  ? x : 0
 
-          console.log( parentBounds.height,  parentBounds.top  ,e.height, (e.clientY))
           let ejeY = parentBounds.height  - (e.height) 
-          //console.log(ejeY)
           let y  = e.top > ejeY ? ejeY : e.top;
           let positionY = y > parentBounds.top  ? y :0
 
